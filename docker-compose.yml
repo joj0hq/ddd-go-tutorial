@@ -1,0 +1,43 @@
+version: '3'
+services:
+  db:
+    container_name: ddd-training-mysql
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    hostname: localhost
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: gopher
+      MYSQL_USER: gopher
+      MYSQL_PASSWORD: password
+      # TODO: 初期設定をする（my.conf内でも可） (yuzajotaro on 2019-10-22)
+      # command: mysql --character-set-server=utf8mb4 --collaction-server=utf8mb4_unicode_ci --skip-charaset-client-handshake
+    volumes:
+      - "db-data:/var/lib/mysql"
+      # TODO: パスを正しく指定する (yuzajotaro on 2019-10-22)
+      # - "./docker/mysql/my.conf:./etc/mysql/my.conf"
+      - "./docker/mysql/init:/docker-entrypoint-initdb.d"
+  web:
+    container_name: ddd-go-training
+    build:
+      context: ./
+      dockerfile: docker/golang/Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src/training:/go/src/training
+#        - vendor:/go/src/training/vendor
+      # TODO: MYSQLに接続したあとに起動するようにする (yuzajotaro on 2019-10-22)
+#    command: sh ./start_app.sh
+#    command: go run app/main.go
+    command: [sh, -c, "go install training/app && cd app && fresh"]
+    depends_on:
+      - db
+    links:
+      - db
+volumes:
+  db-data:
+    driver: local
