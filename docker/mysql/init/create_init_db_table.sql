@@ -1,4 +1,3 @@
-# TODO: 機能するようにする (yuzajotaro on 2019-10-22)
 CREATE TABLE task
 (
     id              INT unsigned NOT NULL AUTO_INCREMENT, # Unique ID for the record
