@@ -1,4 +1,4 @@
-# ddd_go_tutorial
+# DDD Tutorial For Golang
 This is DDD tutorial for goland
 
 ## Usage
