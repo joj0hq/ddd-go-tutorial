@@ -3,6 +3,7 @@ package infrastructure
 import (
 	"training/app/domain"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 )
 
@@ -10,9 +11,9 @@ var (
 	DBMS     = "mysql"
 	USER     = "root"
 	PASS     = "password"
-	PROTOCOL = "tcp(0.0.0.0:3306)"
+	PROTOCOL = "tcp(ddd-training-mysql:3306)"
 	DBNAME   = "gopher"
-	CONNECT  = USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME
+	CONNECT  = USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME + "?parseTime=true"
 )
 
 //DB初期化
