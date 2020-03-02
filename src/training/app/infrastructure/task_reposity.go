@@ -1,13 +1,23 @@
 package infrastructure
 
 import (
-	"github.com/jinzhu/gorm"
 	"training/app/domain"
+
+	"github.com/jinzhu/gorm"
+)
+
+var (
+	DBMS     = "mysql"
+	USER     = "root"
+	PASS     = "password"
+	PROTOCOL = "tcp(0.0.0.0:3306)"
+	DBNAME   = "gopher"
+	CONNECT  = USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME
 )
 
 //DB初期化
 func DbInit() {
-	db, err := gorm.Open("sqlite3", "test.sqlite3")
+	db, err := gorm.Open(DBMS, CONNECT)
 	if err != nil {
 		panic("データベース開けず！（dbInit）")
 	}
@@ -17,7 +27,7 @@ func DbInit() {
 
 //DB追加
 func DbInsert(text string, status string) {
-	db, err := gorm.Open("sqlite3", "test.sqlite3")
+	db, err := gorm.Open(DBMS, CONNECT)
 	if err != nil {
 		panic("データベース開けず！（dbInsert)")
 	}
@@ -27,7 +37,7 @@ func DbInsert(text string, status string) {
 
 //DB更新
 func DbUpdate(id int, text string, status string) {
-	db, err := gorm.Open("sqlite3", "test.sqlite3")
+	db, err := gorm.Open(DBMS, CONNECT)
 	if err != nil {
 		panic("データベース開けず！（dbUpdate)")
 	}
@@ -41,7 +51,7 @@ func DbUpdate(id int, text string, status string) {
 
 //DB削除
 func DbDelete(id int) {
-	db, err := gorm.Open("sqlite3", "test.sqlite3")
+	db, err := gorm.Open(DBMS, CONNECT)
 	if err != nil {
 		panic("データベース開けず！（dbDelete)")
 	}
@@ -53,7 +63,7 @@ func DbDelete(id int) {
 
 //DB全取得
 func DbGetAll() []domain.Task {
-	db, err := gorm.Open("sqlite3", "test.sqlite3")
+	db, err := gorm.Open(DBMS, CONNECT)
 	if err != nil {
 		panic("データベース開けず！(dbGetAll())")
 	}
@@ -65,7 +75,7 @@ func DbGetAll() []domain.Task {
 
 //DB一つ取得
 func DbGetOne(id int) domain.Task {
-	db, err := gorm.Open("sqlite3", "test.sqlite3")
+	db, err := gorm.Open(DBMS, CONNECT)
 	if err != nil {
 		panic("データベース開けず！(dbGetOne())")
 	}
