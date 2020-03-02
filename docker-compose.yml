@@ -9,10 +9,11 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: gopher
-      MYSQL_USER: gopher
-      MYSQL_PASSWORD: password
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+      - TZ=${TZ}
       # TODO: 初期設定をする（my.conf内でも可） (yuzajotaro on 2019-10-22)
       # command: mysql --character-set-server=utf8mb4 --collaction-server=utf8mb4_unicode_ci --skip-charaset-client-handshake
     volumes:
