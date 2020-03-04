@@ -7,6 +7,13 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+type TaskRepository struct {
+}
+
+func NewTaskRepository() *TaskRepository {
+	return &TaskRepository{}
+}
+
 var (
 	DBMS     = "mysql"
 	USER     = "root"
@@ -17,7 +24,7 @@ var (
 )
 
 //DB初期化
-func DbInit() {
+func (t *TaskRepository) DbInit() {
 	db, err := gorm.Open(DBMS, CONNECT)
 	if err != nil {
 		panic("データベース開けず！（dbInit）")
@@ -27,7 +34,7 @@ func DbInit() {
 }
 
 //DB追加
-func Create(text string, status string) {
+func (t *TaskRepository) Create(text string, status string) {
 	db, err := gorm.Open(DBMS, CONNECT)
 	if err != nil {
 		panic("データベース開けず！（dbInsert)")
@@ -37,7 +44,7 @@ func Create(text string, status string) {
 }
 
 //DB更新
-func Update(id int, text string, status string) {
+func (t *TaskRepository) Update(id int, text string, status string) {
 	db, err := gorm.Open(DBMS, CONNECT)
 	if err != nil {
 		panic("データベース開けず！（dbUpdate)")
@@ -51,7 +58,7 @@ func Update(id int, text string, status string) {
 }
 
 //DB削除
-func Delete(id int) {
+func (t *TaskRepository) Delete(id int) {
 	db, err := gorm.Open(DBMS, CONNECT)
 	if err != nil {
 		panic("データベース開けず！（dbDelete)")
@@ -63,7 +70,7 @@ func Delete(id int) {
 }
 
 //DB全取得
-func GetAll() []domain.Task {
+func (t *TaskRepository) GetAll() []domain.Task {
 	db, err := gorm.Open(DBMS, CONNECT)
 	if err != nil {
 		panic("データベース開けず！(dbGetAll())")
@@ -75,7 +82,7 @@ func GetAll() []domain.Task {
 }
 
 //DB一つ取得
-func GetById(id int) domain.Task {
+func (t *TaskRepository) GetById(id int) domain.Task {
 	db, err := gorm.Open(DBMS, CONNECT)
 	if err != nil {
 		panic("データベース開けず！(dbGetOne())")
