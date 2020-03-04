@@ -11,8 +11,7 @@ import (
 
 func main() {
 	r := gin.Default()
-	const TemplateDir string = "templates/"
-	r.LoadHTMLGlob(TemplateDir + "*.html")
+	r.LoadHTMLGlob("templates/*.html")
 	infrastructure.DbInit()
 	presentation.TaskHandler(r)
 	r.Run()

@@ -1,15 +1,15 @@
 <body>
-<h2>「{{.todo.Text}}」の編集中</h2>
+<h2>「{{.task.Text}}」の編集中</h2>
 
-<form method="post" action="/update/{{.todo.ID}}">
-    <p>内容<input type="text" name="text" size="30" value="{{.todo.Text}}" ></p>
+<form method="post" action="/update/{{.task.ID}}">
+    <p>内容<input type="text" name="text" size="30" value="{{.task.Text}}" ></p>
     <p>状態
         <select name="status">
-            {{if eq .todo.Status "未実行"}}
+            {{if eq .task.Status "未実行"}}
                 <option value="未実行" selected>未実行</option>
                 <option value="実行中">実行中</option>
                 <option value="終了">終了</option>
-            {{else if eq .todo.Status "実行中"}}
+            {{else if eq .task.Status "実行中"}}
                 <option value="未実行">未実行</option>
                 <option value="実行中" selected>実行中</option>
                 <option value="終了">終了</option>
