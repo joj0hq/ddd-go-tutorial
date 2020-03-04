@@ -1,11 +1,11 @@
-version: '3'
+version: "3"
 services:
   db:
     container_name: ddd-training-mysql
     build:
       context: .
       dockerfile: ./docker/mysql/Dockerfile
-    hostname: localhost
+#    hostname: db
     ports:
       - "3306:3306"
     environment:
@@ -21,6 +21,8 @@ services:
       # TODO: パスを正しく指定する (yuzajotaro on 2019-10-22)
       # - "./docker/mysql/my.conf:./etc/mysql/my.conf"
       - "./docker/mysql/init:/docker-entrypoint-initdb.d"
+    networks:
+      - ddd_net
   web:
     container_name: ddd-go-training
     build:
@@ -37,8 +39,11 @@ services:
     command: [sh, -c, "go install training/app && cd app && fresh"]
     depends_on:
       - db
-    links:
-      - db
+    networks:
+      - ddd_net
 volumes:
   db-data:
     driver: local
+networks:
+  ddd_net:
+    external: true
