@@ -1,24 +1,25 @@
 package presentation
 
 import (
-	"github.com/gin-gonic/gin"
 	"strconv"
 	"training/app/infrastructure"
+
+	"github.com/gin-gonic/gin"
 )
 
 func TaskHandler(router *gin.Engine) {
 	//Index
 	router.GET("/", func(ctx *gin.Context) {
-		todoList := infrastructure.DbGetAll()
+		tasks := infrastructure.GetAll()
 		ctx.HTML(200, "index.html", gin.H{
-			"todoList": todoList,
+			"tasks": tasks,
 		})
 	})
 	//Create
 	router.POST("/new", func(ctx *gin.Context) {
 		text := ctx.PostForm("text")
 		status := ctx.PostForm("status")
-		infrastructure.DbInsert(text, status)
+		infrastructure.Create(text, status)
 		ctx.Redirect(302, "/")
 	})
 	//Detail
@@ -28,8 +29,8 @@ func TaskHandler(router *gin.Engine) {
 		if err != nil {
 			panic(err)
 		}
-		todo := infrastructure.DbGetOne(id)
-		ctx.HTML(200, "detail.html", gin.H{"todo": todo})
+		task := infrastructure.GetById(id)
+		ctx.HTML(200, "detail.html", gin.H{"task": task})
 	})
 	//Update
 	router.POST("/update/:id", func(ctx *gin.Context) {
@@ -40,7 +41,7 @@ func TaskHandler(router *gin.Engine) {
 		}
 		text := ctx.PostForm("text")
 		status := ctx.PostForm("status")
-		infrastructure.DbUpdate(id, text, status)
+		infrastructure.Update(id, text, status)
 		ctx.Redirect(302, "/")
 	})
 	//削除確認
@@ -50,8 +51,8 @@ func TaskHandler(router *gin.Engine) {
 		if err != nil {
 			panic("ERROR")
 		}
-		todo := infrastructure.DbGetOne(id)
-		ctx.HTML(200, "delete.html", gin.H{"todo": todo})
+		task := infrastructure.GetById(id)
+		ctx.HTML(200, "delete.html", gin.H{"task": task})
 	})
 	//Delete
 	router.POST("/delete/:id", func(ctx *gin.Context) {
@@ -60,7 +61,7 @@ func TaskHandler(router *gin.Engine) {
 		if err != nil {
 			panic("ERROR")
 		}
-		infrastructure.DbDelete(id)
+		infrastructure.Delete(id)
 		ctx.Redirect(302, "/")
 	})
 }
