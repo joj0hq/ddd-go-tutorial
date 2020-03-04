@@ -8,7 +8,6 @@ import (
 )
 
 type TaskService interface {
-	DbInit()
 	Create(text string, status string)
 	Update(id int, text string, status string)
 	Delete(id int)
@@ -28,8 +27,8 @@ func NewTaskService(
 }
 
 //DB初期化
-func (ts *taskService) DbInit() {
-	ts.TaskRepos.DbInit()
+func (ts *taskService) Init() {
+	ts.TaskRepos.Init()
 }
 
 //DB追加
