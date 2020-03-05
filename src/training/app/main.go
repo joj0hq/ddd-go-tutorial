@@ -1,9 +1,9 @@
 package main
 
 import (
-	"training/app/presentation"
-
+	"log"
 	"training/app/infrastructure"
+	"training/app/presentation"
 	"training/app/usecase"
 
 	"github.com/gin-gonic/gin"
@@ -20,6 +20,6 @@ func main() {
 	migrationRepo.Init()
 
 	if err := r.Run(":8080"); err != nil {
-		println("cannot start server: %+v", err)
+		log.Fatalf("cannot start server: %+v", err)
 	}
 }

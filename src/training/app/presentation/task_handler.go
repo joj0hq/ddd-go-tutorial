@@ -1,6 +1,7 @@
 package presentation
 
 import (
+	"log"
 	"strconv"
 	"training/app/usecase"
 
@@ -46,7 +47,7 @@ func (th *TaskHandler) show(ctx *gin.Context) {
 	n := ctx.Param("id")
 	id, err := strconv.Atoi(n)
 	if err != nil {
-		panic(err)
+		log.Fatalf("cannot show task: %+v", err)
 	}
 	task := th.taskService.GetById(id)
 	ctx.HTML(200, "detail.html", gin.H{"task": task})
@@ -56,7 +57,7 @@ func (th *TaskHandler) update(ctx *gin.Context) {
 	n := ctx.Param("id")
 	id, err := strconv.Atoi(n)
 	if err != nil {
-		panic("ERROR")
+		log.Fatalf("cannot update task: %+v", err)
 	}
 	text := ctx.PostForm("text")
 	status := ctx.PostForm("status")
@@ -68,7 +69,7 @@ func (th *TaskHandler) deleteCheck(ctx *gin.Context) {
 	n := ctx.Param("id")
 	id, err := strconv.Atoi(n)
 	if err != nil {
-		panic("ERROR")
+		log.Fatalf("cannot delete check: %+v", err)
 	}
 	task := th.taskService.GetById(id)
 	ctx.HTML(200, "delete.html", gin.H{"task": task})
@@ -78,7 +79,7 @@ func (th *TaskHandler) delete(ctx *gin.Context) {
 	n := ctx.Param("id")
 	id, err := strconv.Atoi(n)
 	if err != nil {
-		panic("ERROR")
+		log.Fatalf("cannot delete task: %+v", err)
 	}
 	th.taskService.Delete(id)
 	ctx.Redirect(302, "/")
