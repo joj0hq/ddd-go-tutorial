@@ -1,10 +1,11 @@
 package infrastructure
 
 import (
+	"log"
 	"training/app/domain"
+	"training/app/utils"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/jinzhu/gorm"
 )
 
 type TaskRepository struct {
@@ -16,9 +17,9 @@ func NewTaskRepository() *TaskRepository {
 
 //DB追加
 func (t *TaskRepository) Create(text string, status string) {
-	db, err := gorm.Open(DBMS, CONNECT)
+	db, err := utils.OpenDataBase()
 	if err != nil {
-		panic("データベース開けず！（dbInsert)")
+		log.Fatalf("cannot connect database: %+v", err)
 	}
 	db.Create(&domain.Task{Text: text, Status: status})
 	defer db.Close()
@@ -26,9 +27,9 @@ func (t *TaskRepository) Create(text string, status string) {
 
 //DB更新
 func (t *TaskRepository) Update(id int, text string, status string) {
-	db, err := gorm.Open(DBMS, CONNECT)
+	db, err := utils.OpenDataBase()
 	if err != nil {
-		panic("データベース開けず！（dbUpdate)")
+		log.Fatalf("cannot connect database: %+v", err)
 	}
 	var todo domain.Task
 	db.First(&todo, id)
@@ -40,9 +41,9 @@ func (t *TaskRepository) Update(id int, text string, status string) {
 
 //DB削除
 func (t *TaskRepository) Delete(id int) {
-	db, err := gorm.Open(DBMS, CONNECT)
+	db, err := utils.OpenDataBase()
 	if err != nil {
-		panic("データベース開けず！（dbDelete)")
+		log.Fatalf("cannot connect database: %+v", err)
 	}
 	var todo domain.Task
 	db.First(&todo, id)
@@ -52,9 +53,9 @@ func (t *TaskRepository) Delete(id int) {
 
 //DB全取得
 func (t *TaskRepository) GetAll() []domain.Task {
-	db, err := gorm.Open(DBMS, CONNECT)
+	db, err := utils.OpenDataBase()
 	if err != nil {
-		panic("データベース開けず！(dbGetAll())")
+		log.Fatalf("cannot connect database: %+v", err)
 	}
 	var tasks []domain.Task
 	db.Order("created_at desc").Find(&tasks)
@@ -64,9 +65,9 @@ func (t *TaskRepository) GetAll() []domain.Task {
 
 //DB一つ取得
 func (t *TaskRepository) GetById(id int) domain.Task {
-	db, err := gorm.Open(DBMS, CONNECT)
+	db, err := utils.OpenDataBase()
 	if err != nil {
-		panic("データベース開けず！(dbGetOne())")
+		log.Fatalf("cannot connect database: %+v", err)
 	}
 	var todo domain.Task
 	db.First(&todo, id)
