@@ -26,11 +26,6 @@ func NewTaskService(
 	}
 }
 
-//DB初期化
-func (ts *taskService) Init() {
-	ts.TaskRepos.Init()
-}
-
 //DB追加
 func (ts *taskService) Create(text string, status string) {
 	ts.TaskRepos.Create(text, status)
