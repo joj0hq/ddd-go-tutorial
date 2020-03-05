@@ -24,9 +24,10 @@ func (t *TaskHandler) SetupRouter(r *gin.RouterGroup) {
 	r.GET("", t.index)
 	r.POST("/new", t.get)
 	r.GET("/detail/:id", t.show)
-	r.PUT("/update/:id", t.update)
-	r.PUT("/delete_check/:id", t.deleteCheck)
-	r.PUT("/delete/:id", t.delete)
+	// TODO: ベタのHTMLなのでこのような実装になっているが本来は良くない (jojo on 2020/03/05)
+	r.POST("/update/:id", t.update)
+	r.GET("/delete_check/:id", t.deleteCheck)
+	r.POST("/delete/:id", t.delete)
 }
 
 func (th *TaskHandler) index(ctx *gin.Context) {
