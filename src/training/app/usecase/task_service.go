@@ -26,27 +26,27 @@ func NewTaskService(
 	}
 }
 
-//DB追加
+// 新規タスクを作成する
 func (ts *taskService) Create(text string, status string) {
 	ts.TaskRepos.Create(text, status)
 }
 
-//DB更新
+// タスクを更新する
 func (ts *taskService) Update(id int, text string, status string) {
 	ts.TaskRepos.Update(id, text, status)
 }
 
-//DB削除
+// タスクを更新する
 func (ts *taskService) Delete(id int) {
 	ts.TaskRepos.Delete(id)
 }
 
-//DB全取得
+// タスクを全取得する
 func (ts *taskService) GetAll() []domain.Task {
 	return ts.TaskRepos.GetAll()
 }
 
-//DB一つ取得
+// タスクを1件取得する
 func (ts *taskService) GetById(id int) domain.Task {
 	return ts.TaskRepos.GetById(id)
 }
