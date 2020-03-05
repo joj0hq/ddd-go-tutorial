@@ -10,10 +10,6 @@
   name = "github.com/jinzhu/gorm"
   version = "1.0.0"
 
-[[constraint]]
-  name = "github.com/mattn/go-sqlite3"
-  version = "v1.2.0"
-
 [prune]
   go-tests = true
   unused-packages = true

@@ -7,7 +7,6 @@ import (
 	"training/app/usecase"
 
 	"github.com/gin-gonic/gin"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {

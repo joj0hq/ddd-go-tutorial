@@ -79,14 +79,6 @@
   version = "v0.0.10"
 
 [[projects]]
-  digest = "1:79e87abf06b873987dee86598950f5b51732ac454d5a5cab6445a14330e6c9e3"
-  name = "github.com/mattn/go-sqlite3"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "b612a2feea6aa87c6d052d9086572551df06497e"
-  version = "v1.11.0"
-
-[[projects]]
   digest = "1:33422d238f147d247752996a26574ac48dcf472976eda7f5134015f06bf16563"
   name = "github.com/modern-go/concurrent"
   packages = ["."]
@@ -142,7 +134,6 @@
     "github.com/go-sql-driver/mysql",
     "github.com/jinzhu/gorm",
     "github.com/joho/godotenv",
-    "github.com/mattn/go-sqlite3",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
