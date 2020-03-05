@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+
+object ユーザー {
+    ユーザーID
+    ユーザー名
+}
+
+object タスク {
+    タスク名
+    期日
+    ステータス
+    作成日
+    担当ユーザーID
+}
+
+タスク "0..n" --> "1" ユーザー : ユーザーID参照
+
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor user
+
+rectangle タスク管理 {
+  user --> (自分のタスクを一覧を閲覧する)
+  user --> (名称・期日を指定したタスクを新規作成する)
+  user --> (タスクのステータス<todo/doing/done>を変更する)
+  user --> (タスク期日を延期する)
+  user --> (タスク名称を変更する)
+  user --> (タスクを完了する)
+}
+@enduml
