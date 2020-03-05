@@ -15,7 +15,6 @@ func NewTaskRepository() *TaskRepository {
 	return &TaskRepository{}
 }
 
-//DB追加
 func (t *TaskRepository) Create(text string, status string) {
 	db, err := utils.OpenDataBase()
 	if err != nil {
@@ -25,7 +24,6 @@ func (t *TaskRepository) Create(text string, status string) {
 	defer db.Close()
 }
 
-//DB更新
 func (t *TaskRepository) Update(id int, text string, status string) {
 	db, err := utils.OpenDataBase()
 	if err != nil {
@@ -39,7 +37,6 @@ func (t *TaskRepository) Update(id int, text string, status string) {
 	db.Close()
 }
 
-//DB削除
 func (t *TaskRepository) Delete(id int) {
 	db, err := utils.OpenDataBase()
 	if err != nil {
@@ -51,7 +48,6 @@ func (t *TaskRepository) Delete(id int) {
 	db.Close()
 }
 
-//DB全取得
 func (t *TaskRepository) GetAll() []domain.Task {
 	db, err := utils.OpenDataBase()
 	if err != nil {
@@ -63,7 +59,6 @@ func (t *TaskRepository) GetAll() []domain.Task {
 	return tasks
 }
 
-//DB一つ取得
 func (t *TaskRepository) GetById(id int) domain.Task {
 	db, err := utils.OpenDataBase()
 	if err != nil {
